@@ -24,13 +24,7 @@ export default async function handler(req, res) {
     const construction = getStore("ulamulem.com.db");
     const objectData = construction.get(appId)
 
-    let data = [];
-
-    if (objectData.data) {
-      data = objectData.data;
-    } else {
-      await construction.setJSON(appId, { appId, data: [] });
-    }
+    let data = objectData.data || [];
   
     // Add the new submitted data
     const submitedData = { username, message, date };
@@ -39,7 +33,7 @@ export default async function handler(req, res) {
     await construction.setJSON(appId, { appId, data });
   
     // Respond with the newly submitted data
-    return res.status(200).json({ data: submitedData });
+    return res.status(200).json({ data });
   }catch (error) {
     // Log and send error response
     console.error('Error while handling the request:', error);
