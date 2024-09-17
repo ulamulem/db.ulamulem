@@ -15,13 +15,9 @@ export default async function handler(req, res) {
   
     // Extract POST data
     const { appId = '129731987ksjdhjk' } = req.query;
-
-    const username = req.body.username || 'unknown';
-    const message = req.body.message || 'no message';
+    const { username = "unknown", message = "no message" } = await JSON.parse(req.body);
     const date = new Date().toISOString();
-  
-    // Define file path
- 
+    
     const construction = await getStore("ulamulemcom_db");
     let objectData = await construction.get(appId)
 
@@ -45,3 +41,10 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
+
+
+// const body = {
+//   username: "hallo",
+//   message: "hallo"
+// }
+// fetch("http://localhost:3001/api/post/localhost", {body: JSON.stringify(body), method: "post"})
