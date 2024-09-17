@@ -40,7 +40,7 @@ export default async function handler(req, res) {
   
 
     // Send success response
-    res.status(200).json({ data });
+    res.status(200).json({ data, objectData, construction });
   } catch (error) {
     // Log and send error response
     console.error('Error while handling the request:', error);
