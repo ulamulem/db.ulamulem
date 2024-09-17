@@ -18,6 +18,10 @@ export default async function handler(req, res) {
     const construction = await getStore("ulamulemcom_db");
     const objectData = await construction.get(appId)
 
+    if(objectData){
+      objectData = JSON.parse(objectData)
+    }
+    
     let data = [];
 
     if (objectData?.data) {

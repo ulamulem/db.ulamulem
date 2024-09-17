@@ -22,8 +22,10 @@ export default async function handler(req, res) {
     // Define file path
  
     const construction = await getStore("ulamulemcom_db");
-    const objectData = await construction.get(appId)
-
+    let objectData = await construction.get(appId)
+    if(objectData){
+      objectData = JSON.parse(objectData)
+    }
     let data = objectData?.data || [];
   
     // Add the new submitted data
