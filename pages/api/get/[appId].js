@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const { appId = '129731987ksjdhjk' } = req.query;
 
 
-    const construction = await getStore("ulamulem.com.db");
+    const construction = await getStore("ulamulemcomdb");
     const objectData = await construction.get(appId)
 
     let data = [];
