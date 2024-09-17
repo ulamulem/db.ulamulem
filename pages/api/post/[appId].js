@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     const submitedData = { username, message, date };
     data.push(submitedData);
   
-    await construction.setJSON(appId, { appId, data: [] });
+    await construction.setJSON(appId, { appId, data });
   
     // Respond with the newly submitted data
     return res.status(200).json({ data: submitedData });
