@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
 
     const construction = await getStore("ulamulemcom_db");
-    const objectData = await construction.get(appId)
+    let objectData = await construction.get(appId)
 
     if(objectData){
       objectData = JSON.parse(objectData)
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     if (objectData?.data) {
       data = objectData.data;
     } else {
-      // await construction.setJSON(appId, { appId, data: [] });
+      await construction.setJSON(appId, { appId, data: [] });
     }
     // Send success response
     res.status(200).json({ data, construction, objectData });
