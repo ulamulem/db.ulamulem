@@ -16,17 +16,9 @@ export default async function handler(req, res) {
 
     const { appId = '129731987ksjdhjk' } = req.query;
 
-    // Define the directory and file paths
-    // const dir = path.resolve('./file'); // Initialize 'dir' before using it
-    // const filePath = path.join(dir, `${appId}.json`);
 
-    const construction = getStore("construction");
+    const construction = getStore("ulamulem.com.db");
     const objectData = construction.get(appId)
-
-    // Ensure the directory exists
-    // if (!fs.existsSync(dir)) {
-    //   fs.mkdirSync(dir, { recursive: true });
-    // }
 
     let data = [];
 
@@ -35,12 +27,8 @@ export default async function handler(req, res) {
     } else {
       await construction.setJSON(appId, { appId, data: [] });
     }
-
-   
-  
-
     // Send success response
-    res.status(200).json({ data, objectData, construction });
+    res.status(200).json({ data });
   } catch (error) {
     // Log and send error response
     console.error('Error while handling the request:', error);

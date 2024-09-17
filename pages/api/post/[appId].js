@@ -22,27 +22,23 @@ export default async function handler(req, res) {
     const date = new Date().toISOString();
   
     // Define file path
-    const dir = path.resolve('./file');
-    const filePath = path.join(dir, `${appId}.json`);
-  
-    // Ensure directory exists
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-  
-    // Read existing file data or initialize an empty array
+ 
+    const construction = getStore("ulamulem.com.db");
+    const objectData = construction.get(appId)
+
     let data = [];
-    if (fs.existsSync(filePath)) {
-      const rawData = fs.readFileSync(filePath, 'utf8');
-      data = JSON.parse(rawData);
+
+    if (objectData.data) {
+      data = objectData.data;
+    } else {
+      await construction.setJSON(appId, { appId, data: [] });
     }
   
     // Add the new submitted data
     const submitedData = { username, message, date };
     data.push(submitedData);
   
-    // Write the updated data back to the file
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    await construction.setJSON(appId, { appId, data: [] });
   
     // Respond with the newly submitted data
     return res.status(200).json({ data: submitedData });
