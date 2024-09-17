@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     const construction = await getStore("ulamulemcom_db");
     const objectData = await construction.get(appId)
 
-    let data = objectData.data || [];
+    let data = objectData?.data || [];
   
     // Add the new submitted data
     const submitedData = { username, message, date };

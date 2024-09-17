@@ -15,12 +15,12 @@ export default async function handler(req, res) {
     const { appId = '129731987ksjdhjk' } = req.query;
 
 
-    const construction = getStore("construction");
+    const construction = await getStore("ulamulemcom_db");
     const objectData = await construction.get(appId)
 
     let data = [];
 
-    if (objectData.data) {
+    if (objectData?.data) {
       data = objectData.data;
     } else {
       await construction.setJSON(appId, { appId, data: [] });
