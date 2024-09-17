@@ -15,9 +15,10 @@ export default async function handler(req, res) {
   
     // Extract POST data
     const { appId = '129731987ksjdhjk' } = req.query;
-    const { username = "unknown", message = "no message" } = await JSON.parse(req.body);
+    const dataBody = await JSON.parse(req.body || {});
+    const { username = "unknown", message = "no message" } = dataBody || {};
     const date = new Date().toISOString();
-    
+
     const construction = await getStore("ulamulemcom_db");
     let objectData = await construction.get(appId)
 
