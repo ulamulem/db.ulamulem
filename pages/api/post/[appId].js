@@ -15,6 +15,7 @@ export default async function handler(req, res) {
   
     // Extract POST data
     const { appId = '129731987ksjdhjk' } = req.query;
+
     const username = req.body.username || 'unknown';
     const message = req.body.message || 'no message';
     const date = new Date().toISOString();
@@ -23,9 +24,11 @@ export default async function handler(req, res) {
  
     const construction = await getStore("ulamulemcom_db");
     let objectData = await construction.get(appId)
+
     if(objectData){
       objectData = JSON.parse(objectData)
     }
+
     let data = objectData?.data || [];
   
     // Add the new submitted data
@@ -35,7 +38,7 @@ export default async function handler(req, res) {
     await construction.setJSON(appId, { appId, data });
   
     // Respond with the newly submitted data
-    return res.status(200).json({ data, construction, objectData });
+    return res.status(200).json({ data: [{submitedData}] });
   }catch (error) {
     // Log and send error response
     console.error('Error while handling the request:', error);
