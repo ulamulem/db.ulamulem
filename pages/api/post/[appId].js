@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const date = new Date().toISOString();
   
     // Define file path
-    const dir = path.resolve('./.next/file');
+    const dir = path.resolve('./file');
     const filePath = path.join(dir, `${appId}.json`);
   
     // Ensure directory exists
