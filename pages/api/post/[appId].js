@@ -1,6 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-
+import { getStore } from "@netlify/blobs";
 export default async function handler(req, res) {
   // Allow only POST requests
   try {

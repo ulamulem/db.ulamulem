@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { getStore } from "@netlify/blobs";
 
 export default async function handler(req, res) {
@@ -35,3 +33,6 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
+
+
+fetch("https://ulamulemdb.netlify.app/api/post/local", {body: JSON.stringify({}), method: "post"})
