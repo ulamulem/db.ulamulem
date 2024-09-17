@@ -21,8 +21,8 @@ export default async function handler(req, res) {
   
     // Define file path
  
-    const construction = getStore("ulamulem.com.db");
-    const objectData = construction.get(appId)
+    const construction = await getStore("ulamulem.com.db");
+    const objectData = await construction.get(appId)
 
     let data = objectData.data || [];
   
