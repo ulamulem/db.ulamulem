@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     const construction = await getStore("ulamulem.com.db");
 
-    construction.delete()
+    construction.delete("ulamulem.com.db")
     const objectData = await construction.get(appId)
 
     let data = [];
