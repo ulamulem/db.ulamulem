@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const { appId = '129731987ksjdhjk' } = req.query;
 
 
-    const construction = await getStore("ulamulemcom_db");
+    const construction = getStore("construction");
     const objectData = await construction.get(appId)
 
     let data = [];
@@ -35,4 +35,4 @@ export default async function handler(req, res) {
 }
 
 
-fetch("https://ulamulemdb.netlify.app/api/post/local", {body: JSON.stringify({}), method: "post"})
+// fetch("https://ulamulemdb.netlify.app/api/post/local", {body: JSON.stringify({}), method: "post"})
