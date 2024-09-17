@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     await construction.setJSON(appId, { appId, data });
   
     // Respond with the newly submitted data
-    return res.status(200).json({ data: [{submitedData}] });
+    return res.status(200).json({ data: [{...submitedData}] });
   }catch (error) {
     // Log and send error response
     console.error('Error while handling the request:', error);
