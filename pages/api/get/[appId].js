@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const { appId = '129731987ksjdhjk' } = req.query;
 
     // Define the directory and file paths
-    const dir = path.resolve('./public/file'); // Initialize 'dir' before using it
+    const dir = path.resolve('./.next/file'); // Initialize 'dir' before using it
     const filePath = path.join(dir, `${appId}.json`);
 
     // Ensure the directory exists
