@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     if (objectData.data) {
       data = objectData.data;
     } else {
-      await construction.setJSON(appId, { appId, data: rawData || [] });
+      await construction.setJSON(appId, { appId, data: [] });
     }
 
    
