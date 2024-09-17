@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { getStore } from "@netlify/blobs";
 
 export default async function handler(req, res) {
   try {
@@ -17,27 +16,23 @@ export default async function handler(req, res) {
     const { appId = '129731987ksjdhjk' } = req.query;
 
     // Define the directory and file paths
-    // const dir = path.resolve('./file'); // Initialize 'dir' before using it
-    // const filePath = path.join(dir, `${appId}.json`);
-
-    const construction = getStore("construction");
-    const objectData = construction.get(appId)
+    const dir = path.resolve('./public/file'); // Initialize 'dir' before using it
+    const filePath = path.join(dir, `${appId}.json`);
 
     // Ensure the directory exists
-    // if (!fs.existsSync(dir)) {
-    //   fs.mkdirSync(dir, { recursive: true });
-    // }
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
 
     let data = [];
 
-    if (objectData) {
-      data = objectData.data;
+    // Read or create file
+    if (fs.existsSync(filePath)) {
+      const rawData = fs.readFileSync(filePath, 'utf8');
+      data = JSON.parse(rawData || '[]');
     } else {
-      await construction.setJSON(appId, { appId, data: rawData || [] });
+      fs.writeFileSync(filePath, '[]');
     }
-
-   
-  
 
     // Send success response
     res.status(200).json({ data });
