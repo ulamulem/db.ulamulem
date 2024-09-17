@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
     let data = [];
 
-    if (objectData) {
+    if (objectData.data) {
       data = objectData.data;
     } else {
       await construction.setJSON(appId, { appId, data: rawData || [] });
